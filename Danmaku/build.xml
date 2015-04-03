@@ -66,6 +66,8 @@
 			</fileset>
 		</copy>
 		<antcall target="dist-win" />
+		<antcall target="dist-linux" />
+		<antcall target="dist-mac" />
 	</target>
 	
 	<target name="dist-win" if="lwjgl.windows">
@@ -76,5 +78,21 @@
 		</copy>
 		
 		<copyfile dest="${dist.dir}/run.bat" src="runScripts/run.bat" />
+	</target>
+	
+	<target name="dist-linux" if="lwjgl.linux">
+		<copy todir="${dist.dir}/lib/native">
+			<fileset dir="${lwjgl.home}/native">
+				<include name="linux/*.*" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="dist-mac" if="lwjgl.mac">
+		<copy todir="${dist.dir}/lib/native">
+			<fileset dir="${lwjgl.home}/native">
+				<include name="macosx/*.*" />
+			</fileset>
+		</copy>
 	</target>
 </project>
