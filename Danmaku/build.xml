@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Danmaku" default="deploy">
+	<property file="./build.properties" />
+
+	<target name="init">
+		<echo>Iniciando build...</echo>
+		<mkdir dir="build" />
+		<mkdir dir="${deploy.dir}" />
+	</target>
+
+	<target name="clean">
+		<delete quiet="true">
+			<fileset dir="build/">
+				<include name="**/*.*" />
+			</fileset>
+			<fileset dir="${deploy.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build" depends="init">
+		<javac source="1.7" memorymaximumsize="512M" target="1.7" destdir="build/" debug="on" debuglevel="lines,vars,source" fork="true" compiler="modern">
+			<src>
+				<pathelement path="src" />
+			</src>
+			<classpath>
+				<fileset dir="lib">
+					<include name="**/*.jar" />
+				</fileset>
+				<pathelement path="E:/desenv/workspace/libs/lwjgl-2.9.0/jar/lwjgl.jar" />
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="deploy" depends="build">
+		<jar jarfile="${deploy.dir}/danmaku.jar">
+			<manifest>
+				<attribute name="Main-Class" value="${main.class}" />
+			</manifest>
+			<fileset dir="build">
+				<include name="**/*.*" />
+			</fileset>
+			<fileset dir="resources">
+				<include name="**/*.*" />
+			</fileset>
+		</jar>
+	</target>
+
+	<target name="gera-release" depends="clean, build, deploy" />
+
+	<target name="dist" depends="gera-release">
+		<delete quiet="true">
+			<fileset dir="${dist.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</delete>
+		<mkdir dir="${dist.dir}"/>
+		
+		<copyfile dest="${dist.dir}/danmaku.jar" src="${deploy.dir}/danmaku.jar"/>
+		
+		<copy todir="${dist.dir}/lib">
+			<fileset dir="${lwjgl.home}/jar">
+				<include name="lwjgl.jar" />
+			</fileset>
+		</copy>
+		<antcall target="dist-win" />
+	</target>
+	
+	<target name="dist-win" if="lwjgl.windows">
+		<copy todir="${dist.dir}/lib/native">
+			<fileset dir="${lwjgl.home}/native">
+				<include name="windows/*.*" />
+			</fileset>
+		</copy>
+		
+		<copyfile dest="${dist.dir}/run.bat" src="runScripts/run.bat" />
+	</target>
+</project>

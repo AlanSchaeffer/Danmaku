@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="src" path="resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="E:/desenv/workspace/libs/dsaff-junit-af30c61/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="E:/desenv/workspace/libs/mockito-1.9.5/mockito-all-1.9.5.jar"/>
+	<classpathentry kind="lib" path="E:/desenv/workspace/libs/lwjgl-2.9.0/jar/lwjgl.jar" sourcepath="E:/desenv/workspace/libs/lwjgl-2.9.0/lwjgl-source-2.9.0.zip">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="E:/desenv/workspace/libs/lwjgl-2.9.0/native/windows"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

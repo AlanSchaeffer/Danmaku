@@ -1,0 +1,1 @@
+java -cp "danmaku.jar;lib/lwjgl.jar" -Djava.library.path="lib/native/windows" com.elven.danmaku.sample.stage01.Stage01
